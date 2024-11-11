@@ -66,8 +66,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 250,
-        "y": 200,
+        "x": 590,
+        "y": 400,
         "wires": [
             [
                 "b09d7ad117e3258c"
@@ -88,24 +88,24 @@
         "retentionPolicyV18Flux": "",
         "org": "myorg",
         "bucket": "greenhouse",
-        "x": 840,
-        "y": 200,
+        "x": 1060,
+        "y": 400,
         "wires": []
     },
     {
         "id": "b09d7ad117e3258c",
         "type": "function",
         "z": "afac86258de7b6e2",
-        "name": "function 1",
-        "func": "const topicParts = msg.topic.split('/');\nconst sensor = topicParts[0];  // Use sensor type (e.g., \"temperature\", \"humidity\") as the measurement\nconst greenhouse = topicParts[1];\nconst zone = topicParts[2];\n\n// Get the sensor value dynamically from msg.payload\nconst value = msg.payload[sensor];\n\nmsg.measurement = greenhouse + '_' + zone\n\n// Construct payload for InfluxDB\nmsg.payload = {\n  [sensor]: value,  // Set the measurement to the sensor type\n};\n\nreturn msg;\n",
+        "name": "parse_topic",
+        "func": "const topicParts = msg.topic.split('/');\nconst sensor = topicParts[0];  // Use sensor type (e.g., \"temperature\", \"humidity\") as the measurement\nconst greenhouse = topicParts[1];\nconst habitat = topicParts[2];\n\n// Get the sensor value dynamically from msg.payload\nconst value = msg.payload[sensor];\n\nmsg.measurement = greenhouse\n\nmsg.payload = \n[\n  {\n    [sensor]: value,\n  },\n  {\n    \"habitat\": habitat\n  }\n];\n\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 520,
-        "y": 200,
+        "x": 790,
+        "y": 400,
         "wires": [
             [
                 "e9cb5f789d736fd2"
