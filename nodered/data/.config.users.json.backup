@@ -17,9 +17,11 @@
             }
         },
         "debug": {
-            "filter": "filterAll",
-            "filteredNodes": [],
-            "clearType": "filtered"
+            "filter": "filterSelected",
+            "filteredNodes": [
+                "0522bdfdcc7de1f1"
+            ],
+            "clearType": "all"
         }
     }
 }
