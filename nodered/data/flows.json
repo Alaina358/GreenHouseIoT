@@ -11,7 +11,7 @@
         "id": "917e16f92bedecfc",
         "type": "mqtt-broker",
         "name": "Greenhouse MQTT Broker",
-        "broker": "host.docker.internal",
+        "broker": "mqtt-broker",
         "port": "1883",
         "clientid": "",
         "autoConnect": true,
@@ -57,8 +57,8 @@
         "id": "f9d2196b76bac5f2",
         "type": "mqtt in",
         "z": "afac86258de7b6e2",
-        "name": "",
-        "topic": "#",
+        "name": "temperature_subscriber",
+        "topic": "temperature/+/+",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "917e16f92bedecfc",
@@ -66,8 +66,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 590,
-        "y": 400,
+        "x": 360,
+        "y": 220,
         "wires": [
             [
                 "b09d7ad117e3258c"
@@ -79,7 +79,7 @@
         "type": "influxdb out",
         "z": "afac86258de7b6e2",
         "influxdb": "91dd54f69453a0f9",
-        "name": "",
+        "name": "add_to_greenhouse_bucket",
         "measurement": "",
         "precision": "",
         "retentionPolicy": "",
@@ -88,8 +88,8 @@
         "retentionPolicyV18Flux": "",
         "org": "myorg",
         "bucket": "greenhouse",
-        "x": 1060,
-        "y": 400,
+        "x": 1080,
+        "y": 460,
         "wires": []
     },
     {
@@ -105,11 +105,155 @@
         "finalize": "",
         "libs": [],
         "x": 790,
-        "y": 400,
+        "y": 380,
         "wires": [
             [
-                "e9cb5f789d736fd2"
+                "e9cb5f789d736fd2",
+                "0522bdfdcc7de1f1"
             ]
         ]
+    },
+    {
+        "id": "6f44131d9cb83f9d",
+        "type": "mqtt in",
+        "z": "afac86258de7b6e2",
+        "name": "water_level_subscriber",
+        "topic": "water_level/+/+",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "917e16f92bedecfc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 360,
+        "y": 300,
+        "wires": [
+            [
+                "b09d7ad117e3258c"
+            ]
+        ]
+    },
+    {
+        "id": "581d2a12b37181d5",
+        "type": "mqtt in",
+        "z": "afac86258de7b6e2",
+        "name": "light_intensity_subscriber",
+        "topic": "light_intensity/+/+",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "917e16f92bedecfc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 350,
+        "y": 380,
+        "wires": [
+            [
+                "b09d7ad117e3258c"
+            ]
+        ]
+    },
+    {
+        "id": "6a92b8960275815f",
+        "type": "mqtt in",
+        "z": "afac86258de7b6e2",
+        "name": "soil_moisture_subscriber",
+        "topic": "soil_moisture/+/+",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "917e16f92bedecfc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 350,
+        "y": 460,
+        "wires": [
+            [
+                "b09d7ad117e3258c"
+            ]
+        ]
+    },
+    {
+        "id": "1a4a4bee4f814c14",
+        "type": "mqtt in",
+        "z": "afac86258de7b6e2",
+        "name": "co2_subscriber",
+        "topic": "co2/+/+",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "917e16f92bedecfc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 380,
+        "y": 540,
+        "wires": [
+            [
+                "b09d7ad117e3258c"
+            ]
+        ]
+    },
+    {
+        "id": "8f08912e93482c8b",
+        "type": "mqtt in",
+        "z": "afac86258de7b6e2",
+        "name": "humidity_subscriber",
+        "topic": "humidity/+/+",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "917e16f92bedecfc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 370,
+        "y": 620,
+        "wires": [
+            [
+                "b09d7ad117e3258c"
+            ]
+        ]
+    },
+    {
+        "id": "6ac7e871a2856b41",
+        "type": "mqtt in",
+        "z": "afac86258de7b6e2",
+        "name": "pH_subscriber",
+        "topic": "ph/+/+",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "917e16f92bedecfc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 390,
+        "y": 140,
+        "wires": [
+            [
+                "b09d7ad117e3258c"
+            ]
+        ]
+    },
+    {
+        "id": "0522bdfdcc7de1f1",
+        "type": "debug",
+        "z": "afac86258de7b6e2",
+        "name": "final_message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 300,
+        "wires": []
     }
 ]
