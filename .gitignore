@@ -1,2 +1,2 @@
 # Exclude all InfluxDB bucket data
-influxdb/data/engine/data/
+influxdb/data/engine/data/038c7a920932e6e7/
