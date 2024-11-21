@@ -3484,3 +3484,9 @@
 1731397406: Client auto-43C8FCAA-6EBE-96E1-547B-DEFA92DAA20B disconnected.
 1731397409: Client nodered_889dfb19c3d83c4c disconnected.
 1731397412: Client auto-645DD02A-5538-0908-D18A-0D92C62986D9 closed its connection.
+1732187389: mosquitto version 2.0.20 starting
+1732187389: Config loaded from /mosquitto/config/mosquitto.conf.
+1732187389: Opening ipv4 listen socket on port 1883.
+1732187389: Opening ipv6 listen socket on port 1883.
+1732187389: Opening websockets listen socket on port 9001.
+1732187389: mosquitto version 2.0.20 running
