@@ -57,3 +57,15 @@ services:
       mqtt-broker:
         condition: service_healthy
     restart: always
+
+  bot:
+    build:
+      context: ./bot/
+    depends_on:
+      mqtt-broker:
+        condition: service_healthy
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - ./bot:/usr/src/app/
