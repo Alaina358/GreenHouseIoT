@@ -4,3 +4,6 @@ influxdb/data/*
 # Allow only influxd.sqlite in influxdb/data
 !influxdb/data/influxd.sqlite
 !influxdb/data/influxd.bolt
+
+# Ignore environment variables file
+.env
