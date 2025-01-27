@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+
+  mqtt-broker:
+    image: eclipse-mosquitto
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ../mosquitto/config:/mosquitto/config
+      - ../mosquitto/data:/mosquitto/data
+      - ../mosquitto/log:/mosquitto/log
+    healthcheck:
+      test: ["CMD-SHELL", "mosquitto_pub -h localhost -t 'healthcheck' -m 'ping' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  influxdb:
+    image: influxdb
+    ports:
+      - "8086:8086"
+    volumes:
+      - ../influxdb/data:/var/lib/influxdb2
+
+  node-red:
+    image: nodered/node-red
+    ports:
+      - "1880:1880"
+    depends_on:
+      - mqtt-broker
+      - influxdb
+    volumes:
+      - ../nodered/data:/data
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - influxdb
+    volumes:
+      - ../grafana/data:/var/lib/grafana
+
+  sensors:
+    build:
+      context: ../sensors/
+      dockerfile: ../sensors/Dockerfile
+    volumes:
+      - ../sensors/:/usr/src/app/
+    depends_on:
+      mqtt-broker:
+        condition: service_healthy
+    restart: always
+
+  bot:
+    build:
+      context: ../bot/
+    depends_on:
+      mqtt-broker:
+        condition: service_healthy
+    env_file:
+      - ../config/.env
+    restart: always
+    volumes:
+      - ../bot:/usr/src/app/
