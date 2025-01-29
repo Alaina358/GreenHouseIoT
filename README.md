@@ -12,7 +12,12 @@ The IoT-Based Greenhouse Management System is an innovative solution engineered 
 2. **Start Docker Desktop**:
    - Ensure Docker is running before you proceed.
 3. **Set up the Project**:
-   - Open the project folder in the terminal and execute the following commands sequentially:
+   - Open the project config folder in the terminal
+     ```
+     cd GreenHouseIoT
+     cd config
+     ```
+   - Execute the following commands sequentially:
      ```
      docker-compose build
      docker-compose up
