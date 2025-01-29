@@ -97,7 +97,7 @@
         "type": "function",
         "z": "afac86258de7b6e2",
         "name": "parse_topic",
-        "func": "const topicParts = msg.topic.split('/');\nconst sensor = topicParts[0];  // Use sensor type (e.g., \"temperature\", \"humidity\") as the measurement\nconst greenhouse = topicParts[1];\nconst habitat = topicParts[2];\n\n// Get the sensor value dynamically from msg.payload\nconst value = msg.payload[sensor];\n\nmsg.measurement = greenhouse\n\nmsg.payload = \n[\n  {\n    [sensor]: value,\n  },\n  {\n    \"habitat\": habitat\n  }\n];\n\n\nreturn msg;\n",
+        "func": "const topicParts = msg.topic.split('/');\nconst sensor = topicParts[0];  // Use sensor type (e.g., \"temperature\", \"humidity\") as the measurement\nconst greenhouse = topicParts[1];\nconst habitat = topicParts[2];\n\n// Get the sensor value dynamically from msg.payload\nconst value = msg.payload[sensor];\n\nmsg.measurement = sensor\n\nmsg.payload = \n[\n  {\n    [greenhouse]: value,\n  },\n  {\n    \"habitat\": habitat\n  }\n];\n\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
